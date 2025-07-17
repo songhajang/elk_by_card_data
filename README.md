@@ -7,7 +7,7 @@
 |신준수|문민경|최소영|장송하|
 |:---:|:---:|:---:|:---:|
 |[shinjunsuuu](https://github.com/shinjunsuuu)|[Minkyoungg0](https://github.com/Minkyoungg0)|[](https)|[jangongha](https://github.com/songhajang)|
-|<img width="200" height="250" alt="Image" src="https://github.com/shinjunsuuu.png" />|<img width="200" height="250" alt="Image" src="" />|<img width="200" height="250" alt="Image" src="" />|<img width="200" height="250" alt="Image" src="https://github.com/user-attachments/assets/36f811b5-e8e9-43f4-b833-b4b9dae40e82" />|
+|<img width="200" height="250" alt="Image" src="https://github.com/shinjunsuuu.png" />|<img width="200" height="250" alt="Image" src="" />|<img width="200" height="250" alt="Image" src="https://github.com/user-attachments/assets/94f643a0-b74f-42ec-8eb4-e00ffcae4ef1" />|<img width="200" height="250" alt="Image" src="https://github.com/user-attachments/assets/36f811b5-e8e9-43f4-b833-b4b9dae40e82" />|
   
 </div>
 
