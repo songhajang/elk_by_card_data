@@ -7,8 +7,8 @@
   
 |신준수|문민경|최소영|장송하|
 |:---:|:---:|:---:|:---:|
-|[shinjunsuuu](https://github.com/shinjunsuuu)|[Minkyoungg0](https://github.com/Minkyoungg0)|[](https)|[jangongha](https://github.com/songhajang)|
-|<img width="200" height="250" alt="Image" src="https://github.com/shinjunsuuu.png" />|<img width="200" height="250" alt="Image" src="https://github.com/user-attachments/assets/94f643a0-b74f-42ec-8eb4-e00ffcae4ef1" />|<img width="200" height="250" alt="Image" src="" />|<img width="200" height="250" alt="Image" src="https://github.com/user-attachments/assets/36f811b5-e8e9-43f4-b833-b4b9dae40e82" />|
+|[shinjunsuuu](https://github.com/shinjunsuuu)|[Minkyoungg0](https://github.com/Minkyoungg0)|[ottffss1005](https://github.com/ottffss1005)|[jangongha](https://github.com/songhajang)|
+|<img width="200" height="250" alt="Image" src="https://github.com/shinjunsuuu.png" />|<img width="200" height="250" alt="Image" src="https://github.com/user-attachments/assets/94f643a0-b74f-42ec-8eb4-e00ffcae4ef1" />|<img width="200" height="250" alt="Image" src="https://github.com/ottffss1005.png" />|<img width="200" height="250" alt="Image" src="https://github.com/user-attachments/assets/36f811b5-e8e9-43f4-b833-b4b9dae40e82" />|
   
 </div>
 
@@ -335,10 +335,10 @@ tcp   LISTEN 0      4096               [::]:5601          [::]:*
 
 
 ### 🔹 4. 회원등급별 채널 이용 여부
+<img width="984" height="477" alt="image" src="https://github.com/user-attachments/assets/3019cee8-37bf-4508-b603-2f6e23bb5e2d" />
 
-<img width="561" height="509" alt="Image" src="https://github.com/user-attachments/assets/c2bc206f-6b30-4d49-9dbe-cada141032ad" />
 
-- 높은 등급일수록 디지털 채널 사용률이 높습니다.
+- 등급이 낮을수록 디지털 채널 사용률이 낮기에 이용하는 고객의 수가 적습니다.
 - **로열 고객군이 디지털 채널을 적극적으로 이용**하는 경향으로 확인이 가능햇으며,
 - 등급이 낮은 고객의 채널 유입 전략 필요하다는걸 확인 할 수 있습니다.
 
