@@ -110,3 +110,216 @@ ELK를 이용한 `cards` index(table)에서 **미디어 채널 이용 여부**�
 # 🌟 향후 계획
 - 파이프라인(filebeat, logstash)를 이용하여 필요한 데이터만 뽑아 만들어 볼 예정입니다.
 - 현재 환경은 window 로 제작하여 향후엔 Liunx 에서도 구동구현을 해 볼 예정입니다.
+- **Ubuntu 24.04** 환경에서 **Docker Compose**를 활용하여 ELK Stack (Elasticsearch, Logstash, Kibana)과 Filebeat를 구성
+
+---
+
+## 📁 프로젝트 디렉토리 구조
+
+```
+ElkStack/
+│
+├── docker-compose.yml
+│
+├── logstash/
+│   ├── config/
+│   │   └── logstash.yml
+│   └── pipeline/
+│       └── logstash.conf
+│
+├── filebeat/
+│   └── filebeat.yml
+```
+
+---
+
+## 📦 컨테이너 구성
+
+| 서비스       | 이미지                                           | 포트 매핑              |
+|--------------|--------------------------------------------------|-------------------------|
+| Elasticsearch | `docker.elastic.co/elasticsearch/elasticsearch:7.11.2` | 9200, 9300              |
+| Logstash     | `docker.elastic.co/logstash/logstash:7.11.2`     | 5044, 9600              |
+| Kibana       | `docker.elastic.co/kibana/kibana:7.11.2`         | 5601                    |
+| Filebeat     | `docker.elastic.co/beats/filebeat:7.11.2`        | -                       |
+
+---
+
+## 📄 docker-compose.yml
+
+```yaml
+version: '3.7'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:7.11.2
+    container_name: logstash
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+      - ./logstash/config:/usr/share/logstash/config
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:7.11.2
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:7.11.2
+    container_name: filebeat
+    user: root
+    volumes:
+      - ./filebeat/filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/log:/var/log:ro
+    depends_on:
+      - logstash
+      - elasticsearch
+    command: ["--strict.perms=false"]
+
+volumes:
+  esdata:
+
+```
+
+---
+
+## 🔧 Logstash 설정
+
+**logstash/config/logstash.yml**
+```yaml
+http.host: "0.0.0.0"
+xpack.monitoring.enabled: false
+```
+
+**logstash/pipeline/logstash.conf**
+```conf
+input {
+  beats {
+    port => 5044
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["http://elasticsearch:9200"]
+    index => "logstash-%{+YYYY.MM.dd}"
+  }
+}
+```
+
+---
+
+## 🔍 Filebeat 설정
+
+**filebeat/filebeat.yml**
+```yaml
+filebeat.inputs:
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/*.log
+
+output.logstash:
+  hosts: ["logstash:5044"]
+```
+
+> ✅ `filebeat.yml`은 읽기 전용으로 컨테이너에 마운트되며, `logstash` 서비스 이름으로 통신합니다.
+
+---
+
+## 🚀 실행 방법
+
+```bash
+# 1. 디렉토리 이동
+cd ElkStack
+
+# 2. docker-compose 실행
+sudo docker-compose up -d
+```
+
+---
+
+## ✅ 동작 확인
+
+```bash
+# Elasticsearch
+curl http://localhost:9200
+
+# Kibana
+http://<서버-IP>:5601
+
+# 로그 확인
+sudo docker logs logstash
+sudo docker logs filebeat
+```
+
+---
+
+## ❗ 트러블 슈팅
+
+- `logstash.yml: is a directory`: 설정 경로가 잘못되어 생기는 에러로, `logstash/config/logstash.yml` 파일이 실제로 **디렉토리**일 경우 삭제 후 파일로 재생성
+  ```bash
+  sudo rm -r ./logstash/config/logstash.yml
+  nano ./logstash/config/logstash.yml
+  ```
+
+- 포트 접속 안 될 때:
+  - `ss -tuln | grep 5601` → 포트 열림 확인
+  - `ufw status` → 방화벽 설정 확인
+  - 클라우드 서버라면 **보안 그룹에서 5601, 9200 포트 오픈 필요**
+
+---
+## 🔄 NAT 설정을 통한 localhost 접속
+
+ELK Stack 컨테이너들을 외부에서 `localhost`로 접속 가능하도록 하기 위해 **NAT 포트 포워딩**을 설정했습니다. 
+
+### 설정 내용
+
+- `elasticsearch`: 9200 → 9200
+- `kibana`: 5601 → 5601
+- `logstash`: 5044 → 5044
+
+Docker Compose 파일에서 `ports` 항목을 통해 각 컨테이너의 포트를 호스트의 포트에 바인딩하여 NAT 역할을 하도록 구성했습니다.
+
+```yaml
+ports:
+  - "5601:5601"  # kibana
+  - "9200:9200"  # elasticsearch
+  - "5044:5044"  # logstash input
+```
+
+이 설정으로 Ubuntu에서 ELK Stack을 실행한 후 브라우저에서 `http://localhost:5601`, `http://localhost:9200` 등으로 접속할 수 있습니다.
+
+또한 다음 명령어를 통해 포트 바인딩 상태를 확인했습니다:
+
+```bash
+sudo ss -tuln | grep 5601
+```
+
+결과 예시:
+
+```
+tcp   LISTEN 0      4096            0.0.0.0:5601       0.0.0.0:*
+tcp   LISTEN 0      4096               [::]:5601          [::]:*
+```
