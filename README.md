@@ -70,7 +70,7 @@
 - **운영체제**: Windows 11 / ubuntu 24.04
 
 <details>
-  <summary>ubuntu docker 컨테이너화</summary>
+  <summary>ubuntu docker 설정</summary>
   <div markdown="1">
   
 ## 📁 프로젝트 디렉토리 구조
