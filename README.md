@@ -106,7 +106,8 @@
 <img width="725" height="477" alt="Image" src="https://github.com/user-attachments/assets/c1548319-2037-4b85-9fd4-b223c61b5b19" />
 
 - 여성 고객의 디지털 채널 가입률이 상대적으로 **높게 나타납니다**
-- 마케팅 시 성별 특성에 따른 접근 전략 필요하다는걸 알 수 있습니다. 
+- 마케팅 시 성별 특성에 따른 접근 전략 필요하다는걸 알 수 있습니다.
+- 미디어 채널의 이용자가 대다수 여성인것을 토대로 이벤트 광고 및 타겟층을 여성으로 잡을 수 있다는것을 알 수 있습니다.
 
 ---
 
@@ -124,10 +125,11 @@
 ---
 
 ### 🔹 4. 성별에 따른 채널 사용 여부
-<img width="803" height="503" alt="Image" src="https://github.com/user-attachments/assets/93758533-0548-4bce-bec8-bbfb57d33f87" />
+<img width="600" height="300" alt="Image" src="https://github.com/user-attachments/assets/b5c893f8-e601-4574-abc9-49d5b5ec2ea5" />
+<img width="600" height="300" alt="Image" src="https://github.com/user-attachments/assets/b917872f-3f32-44c7-86cd-a8e33690ad69" />
+<!--<img width="803" height="503" alt="Image" src="https://github.com/user-attachments/assets/93758533-0548-4bce-bec8-bbfb57d33f87" /> -->
 
-- 성별별로 볼 때, **여성 고객의 채널 사용률이 상대적으로 남성 고객보다** 높다는걸 알 수 있습니다.
-- 미디어 채널의 이용자가 대다수 여성인것을 토대로 이벤트 광고 및 타겟층을 여성으로 잡을 수 있다는것을 알 수 있습니다.
+- **여성 고객의 채널 사용률이 남성 고객과 0.66% 차이로 미미합니다.** 
 
 ---
 
